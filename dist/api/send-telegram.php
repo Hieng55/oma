@@ -82,7 +82,7 @@ $idea = field('idea', 2000, true);
 $placement = field('placement', 180) ?: 'Not decided';
 $artist = field('artist', 100) ?: 'No preference';
 $style = field('style', 120) ?: 'No preference';
-$instagram = field('instagram', 120, true);
+$instagram = field('instagram', 120) ?: 'Not provided';
 $smsConsentValue = $_POST['sms_consent'] ?? '';
 $marketingConsentValue = $_POST['marketing_consent'] ?? '';
 $smsConsent = is_string($smsConsentValue) && $smsConsentValue === 'yes';

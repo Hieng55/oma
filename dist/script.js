@@ -237,7 +237,7 @@ if (inquiryForm) {
 
   const instagramField = document.createElement('div');
   instagramField.className = 'field';
-  instagramField.innerHTML = '<label for="instagram-handle">Instagram</label><small>Required</small><input id="instagram-handle" name="instagram" autocomplete="off" placeholder="@username" required maxlength="120">';
+  instagramField.innerHTML = '<label for="instagram-handle">Instagram</label><small>Optional</small><input id="instagram-handle" name="instagram" autocomplete="off" placeholder="@username" maxlength="120">';
   submitSection?.before(instagramField);
 
   const consentField = document.createElement('fieldset');
