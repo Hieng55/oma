@@ -180,12 +180,27 @@ function telegramRequest(string $botToken, string $method, array $payload, bool 
 }
 
 if ($photos !== []) {
-    $plainCaption = "OMA booking photos\nName: {$name}\nContact: {$contact}\nInstagram: {$instagram}\nArtist: {$artist}\nStyle: {$style}\nPlacement: {$placement}";
+    $shorten = static function (string $value, int $limit): string {
+        $length = function_exists('mb_strlen') ? mb_strlen($value) : strlen($value);
+        if ($length <= $limit) return $value;
+        return (function_exists('mb_substr') ? mb_substr($value, 0, $limit - 1) : substr($value, 0, $limit - 1)) . '…';
+    };
+    $photoCaption = "<b>New OMA Tattoo booking request</b>\n\n"
+        . "<b>Name:</b> " . $escape($shorten($name, 70)) . "\n"
+        . "<b>Contact:</b> " . $escape($shorten($contact, 80)) . "\n"
+        . "<b>Instagram:</b> " . $escape($shorten($instagram, 70)) . "\n"
+        . "<b>Artist:</b> " . $escape($shorten($artist, 50)) . "\n"
+        . "<b>Style:</b> " . $escape($shorten($style, 70)) . "\n"
+        . "<b>Placement:</b> " . $escape($shorten($placement, 90)) . "\n\n"
+        . "<b>Tattoo idea:</b>\n" . $escape($shorten($idea, 350)) . "\n\n"
+        . "<b>SMS consent:</b> Yes\n"
+        . "<b>Promotional consent:</b> " . ($marketingConsent ? 'Yes' : 'No');
     if (count($photos) === 1) {
         $photo = $photos[0];
         $photoSent = telegramRequest($botToken, 'sendPhoto', [
             'chat_id' => $chatId,
-            'caption' => $plainCaption,
+            'caption' => $photoCaption,
+            'parse_mode' => 'HTML',
             'photo' => new CURLFile($photo['path'], $photo['mime'], $photo['name']),
         ], true);
     } else {
@@ -194,7 +209,10 @@ if ($photos !== []) {
         foreach ($photos as $index => $photo) {
             $attachmentName = 'photo' . $index;
             $mediaItem = ['type' => 'photo', 'media' => 'attach://' . $attachmentName];
-            if ($index === 0) $mediaItem['caption'] = $plainCaption;
+            if ($index === 0) {
+                $mediaItem['caption'] = $photoCaption;
+                $mediaItem['parse_mode'] = 'HTML';
+            }
             $media[] = $mediaItem;
             $photoPayload[$attachmentName] = new CURLFile($photo['path'], $photo['mime'], $photo['name']);
         }
@@ -202,16 +220,16 @@ if ($photos !== []) {
         $photoSent = telegramRequest($botToken, 'sendMediaGroup', $photoPayload, true);
     }
     if (!$photoSent) respond(502, false, 'Unable to send the reference images. Please try again.');
-}
-
-$messageSent = telegramRequest($botToken, 'sendMessage', [
-    'chat_id' => $chatId,
-    'text' => $message,
-    'parse_mode' => 'HTML',
-    'disable_web_page_preview' => true,
-]);
-if (!$messageSent) {
-    respond(502, false, 'Unable to send your booking details right now.');
+} else {
+    $messageSent = telegramRequest($botToken, 'sendMessage', [
+        'chat_id' => $chatId,
+        'text' => $message,
+        'parse_mode' => 'HTML',
+        'disable_web_page_preview' => true,
+    ]);
+    if (!$messageSent) {
+        respond(502, false, 'Unable to send your booking details right now.');
+    }
 }
 
 @file_put_contents($rateFile, (string) time(), LOCK_EX);
