@@ -11,6 +11,15 @@ if (headerLogo && !headerLogo.querySelector('img')) {
   headerLogo.innerHTML = '<img src="assets/oma-logo.webp" alt="OMA Tattoo">';
 }
 
+document.querySelectorAll('.desktop-nav, .mobile-menu').forEach((navigation) => {
+  if (navigation.querySelector('a[href="work-with-us.html"]')) return;
+  const workLink = document.createElement('a');
+  workLink.href = 'work-with-us.html';
+  workLink.textContent = 'Work with us';
+  const contactLink = navigation.querySelector('a[href="contact.html"]');
+  navigation.insertBefore(workLink, contactLink || null);
+});
+
 if (mobileMenu) {
   const homeLink = document.createElement('a');
   homeLink.href = 'index.html';
