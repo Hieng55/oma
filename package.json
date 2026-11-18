@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "node build.mjs"
+  },
   "devDependencies": {
     "playwright-core": "^1.65.1"
   }
