@@ -1,23 +1,23 @@
 const artistProfiles = {
   amaury: {
     name: 'Amaury', specialty: 'Realism · Cover up', folder: 'amaury',
-    images: ['photo_2026-11-18_22-08-45.jpg','photo_2026-11-18_22-08-48.jpg','photo_2026-11-18_22-08-53.jpg','photo_2026-11-18_22-08-54.jpg','photo_2026-11-18_22-08-56.jpg','photo_2026-11-18_22-09-29.jpg','photo_2026-11-18_22-09-32.jpg']
+    images: ['photo_2026-11-18_22-08-45.webp','photo_2026-11-18_22-08-48.webp','photo_2026-11-18_22-08-53.webp','photo_2026-11-18_22-08-54.webp','photo_2026-11-18_22-08-56.webp','photo_2026-11-18_22-09-29.webp','photo_2026-11-18_22-09-32.webp']
   },
   bee: {
     name: 'Bee', specialty: 'Realism · Mini color · Anime', folder: 'Bee',
-    images: ['photo_2026-11-18_22-13-34.jpg','photo_2026-11-18_22-13-36.jpg','photo_2026-11-18_22-13-38.jpg','photo_2026-11-18_22-13-43.jpg','photo_2026-11-18_22-13-52.jpg','photo_2026-11-18_22-13-54.jpg']
+    images: ['photo_2026-11-18_22-13-34.webp','photo_2026-11-18_22-13-36.webp','photo_2026-11-18_22-13-38.webp','photo_2026-11-18_22-13-43.webp','photo_2026-11-18_22-13-52.webp','photo_2026-11-18_22-13-54.webp']
   },
   kimiko: {
     name: 'Kimiko', specialty: 'X-ray · Fine line · Floral', folder: 'Kimiko',
-    images: ['photo_2026-11-18_22-12-08.jpg','photo_2026-11-18_22-12-10.jpg','photo_2026-11-18_22-12-13.jpg','photo_2026-11-18_22-12-14.jpg','photo_2026-11-18_22-12-16.jpg','photo_2026-11-18_22-12-18.jpg','photo_2026-11-18_22-12-20.jpg','photo_2026-11-18_22-12-51.jpg']
+    images: ['photo_2026-11-18_22-12-08.webp','photo_2026-11-18_22-12-10.webp','photo_2026-11-18_22-12-13.webp','photo_2026-11-18_22-12-14.webp','photo_2026-11-18_22-12-16.webp','photo_2026-11-18_22-12-18.webp','photo_2026-11-18_22-12-20.webp','photo_2026-11-18_22-12-51.webp']
   },
   tea: {
     name: 'Tea', specialty: 'Black & grey · Realism', folder: 'Tea',
-    images: ['photo_2026-11-18_22-14-18.jpg','photo_2026-11-18_22-14-20.jpg','photo_2026-11-18_22-14-22.jpg','photo_2026-11-18_22-14-24.jpg','photo_2026-11-18_22-14-26.jpg','photo_2026-11-18_22-14-27.jpg','photo_2026-11-18_22-14-29.jpg']
+    images: ['photo_2026-11-18_22-14-18.webp','photo_2026-11-18_22-14-20.webp','photo_2026-11-18_22-14-22.webp','photo_2026-11-18_22-14-24.webp','photo_2026-11-18_22-14-26.webp','photo_2026-11-18_22-14-27.webp','photo_2026-11-18_22-14-29.webp']
   },
   thea: {
     name: 'Thea', specialty: 'Fine line · Floral · Ornamental', folder: 'Thea',
-    images: ['photo_2026-11-18_22-10-24.jpg','photo_2026-11-18_22-10-26.jpg','photo_2026-11-18_22-10-28.jpg','photo_2026-11-18_22-10-30.jpg','photo_2026-11-18_22-10-32.jpg','photo_2026-11-18_22-10-38.jpg','photo_2026-11-18_22-10-46.jpg','photo_2026-11-18_22-10-48.jpg','photo_2026-11-18_22-10-50.jpg']
+    images: ['photo_2026-11-18_22-10-24.webp','photo_2026-11-18_22-10-26.webp','photo_2026-11-18_22-10-28.webp','photo_2026-11-18_22-10-30.webp','photo_2026-11-18_22-10-32.webp','photo_2026-11-18_22-10-38.webp','photo_2026-11-18_22-10-46.webp','photo_2026-11-18_22-10-48.webp','photo_2026-11-18_22-10-50.webp']
   }
 };
 
@@ -34,6 +34,8 @@ const cover = document.querySelector('[data-artist-cover]');
 const coverSource = artistPath(artist.images[0]);
 cover.src = coverSource;
 cover.alt = `${artist.name} tattoo artist at OMA Tattoo`;
+cover.fetchPriority = 'high';
+cover.decoding = 'async';
 cover.parentElement.style.setProperty('--profile-cover', `url("${coverSource}")`);
 
 const gallery = document.querySelector('[data-artist-gallery]');
@@ -47,6 +49,7 @@ artist.images.slice(1).forEach((file, index) => {
   image.src = artistPath(file);
   image.alt = `Tattoo work by ${artist.name}`;
   image.loading = 'lazy';
+  image.decoding = 'async';
   button.append(image);
   gallery.append(button);
 });

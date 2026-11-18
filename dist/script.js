@@ -8,7 +8,7 @@ document.querySelector('.site-header .local-time')?.remove();
 const headerLogo = document.querySelector('.header-logo');
 if (headerLogo && !headerLogo.querySelector('img')) {
   headerLogo.setAttribute('aria-label', 'OMA Tattoo home');
-  headerLogo.innerHTML = '<img src="assets/oma-logo.png" alt="OMA Tattoo">';
+  headerLogo.innerHTML = '<img src="assets/oma-logo.webp" alt="OMA Tattoo">';
 }
 
 if (mobileMenu) {
@@ -87,6 +87,16 @@ let slideIndex = 0;
 let slideshowTimer;
 const mobileSlideshow = window.matchMedia('(max-width: 820px)');
 
+const loadMobileSlides = () => {
+  if (!mobileSlideshow.matches) return;
+  slides.slice(1).forEach((slide) => {
+    const image = slide.querySelector('img[data-src]');
+    if (!image) return;
+    image.src = image.dataset.src;
+    image.removeAttribute('data-src');
+  });
+};
+
 const showSlide = (nextIndex) => {
   if (!slides.length) return;
   slideIndex = (nextIndex + slides.length) % slides.length;
@@ -96,6 +106,7 @@ const showSlide = (nextIndex) => {
 const restartSlideshow = () => {
   window.clearInterval(slideshowTimer);
   if (mobileSlideshow.matches && slides.length > 1) {
+    loadMobileSlides();
     slideshowTimer = window.setInterval(() => showSlide(slideIndex + 1), 5500);
   }
 };
@@ -105,6 +116,7 @@ slideDots.forEach((dot, index) => dot.addEventListener('click', () => {
 }));
 restartSlideshow();
 mobileSlideshow.addEventListener('change', () => {
+  loadMobileSlides();
   showSlide(0);
   restartSlideshow();
 });

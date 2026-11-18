@@ -1,7 +1,7 @@
 document.querySelector('[data-style-shell]').innerHTML = `
   <a class="skip-link" href="#main">Skip to content</a><div class="page-progress" aria-hidden="true"><span></span></div>
   <header class="site-header" data-header>
-    <a class="header-logo" href="index.html" aria-label="OMA Tattoo home"><img src="assets/oma-logo.png" alt="OMA Tattoo"></a>
+    <a class="header-logo" href="index.html" aria-label="OMA Tattoo home"><img src="assets/oma-logo.webp" alt="OMA Tattoo"></a>
     <nav class="desktop-nav" aria-label="Main navigation"><a href="artists.html">Artists</a><a href="styles.html" aria-current="page">Styles</a><a href="studio.html">Studio</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></nav>
     <p class="local-time"><span data-omaha-time>--:-- --</span> · OMAHA</p><a class="book-button" href="booking.html" data-style-book>Book now</a>
     <button class="menu-button" type="button" aria-controls="mobile-menu" aria-expanded="false"><span>Menu</span><i></i><i></i></button>
