@@ -169,8 +169,18 @@ footer .footer-socials .footer-social-map{width:16px;height:22px;filter:none}
 .site-header .local-time{display:none}
 
 /* Booking reference photo upload */
-.booking-photo-field input[type="file"]{padding:10px;background:rgba(10,10,10,.035);cursor:pointer}
-.booking-photo-field input[type="file"]::file-selector-button{margin-right:12px;padding:10px 14px;border:0;border-radius:4px;background:var(--ink);color:var(--paper);font:700 .72rem/1 var(--body);text-transform:uppercase;cursor:pointer}
+.booking-photo-input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.booking-photo-field .booking-photo-dropzone{display:flex;min-height:150px;margin-top:10px;padding:24px;flex-direction:column;align-items:center;justify-content:center;gap:7px;border:1px dashed rgba(10,10,10,.3);border-radius:7px;background:rgba(10,10,10,.025);color:var(--ink);cursor:pointer;transition:border-color .16s ease-out,background-color .16s ease-out}
+.booking-photo-field .booking-photo-dropzone:hover,.booking-photo-field .booking-photo-dropzone.is-dragging{border-color:var(--ink);background:rgba(10,10,10,.08)}
+.booking-photo-dropzone span{display:grid;width:34px;height:34px;place-items:center;border:1px solid rgba(10,10,10,.35);border-radius:50%;font-size:1.4rem}
+.booking-photo-dropzone strong{font-size:.8rem;text-transform:uppercase}
+.booking-photo-dropzone em{font-size:.75rem;font-style:normal;color:#5e5a54;text-transform:none}
+.booking-photo-list{margin-top:8px;overflow-wrap:anywhere;color:#5e5a54;font-size:.75rem}
+.booking-consents{margin:0 0 28px;padding:20px;border:1px solid rgba(10,10,10,.18);border-radius:7px}
+.booking-consents legend{padding:0 9px;font-size:.75rem;font-weight:700;text-transform:uppercase}
+.booking-consents label{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:start;margin:0 0 13px;font-size:.78rem;cursor:pointer}
+.booking-consents input{width:16px;height:16px;margin:2px 0 0;accent-color:var(--ink)}
+.booking-consents p{margin:4px 0 0;color:#5e5a54;font-size:.68rem;font-style:italic}
 .booking-submit button:disabled{cursor:wait;opacity:.58}
 
 /* Mobile navigation hierarchy and current-page state */

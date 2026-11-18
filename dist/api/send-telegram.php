@@ -81,6 +81,15 @@ $contact = field('contact', 180, true);
 $idea = field('idea', 2000, true);
 $placement = field('placement', 180) ?: 'Not decided';
 $artist = field('artist', 100) ?: 'No preference';
+$style = field('style', 120) ?: 'No preference';
+$instagram = field('instagram', 120, true);
+$smsConsentValue = $_POST['sms_consent'] ?? '';
+$marketingConsentValue = $_POST['marketing_consent'] ?? '';
+$smsConsent = is_string($smsConsentValue) && $smsConsentValue === 'yes';
+$marketingConsent = is_string($marketingConsentValue) && $marketingConsentValue === 'yes';
+if (!$smsConsent) {
+    respond(422, false, 'Please confirm the informational text message consent.');
+}
 
 $photos = [];
 $photoUpload = $_FILES['photos'] ?? null;
@@ -134,9 +143,13 @@ $escape = static fn(string $value): string => htmlspecialchars($value, ENT_QUOTE
 $message = "<b>New OMA Tattoo booking request</b>\n\n"
     . "<b>Name:</b> " . $escape($name) . "\n"
     . "<b>Contact:</b> " . $escape($contact) . "\n"
+    . "<b>Instagram:</b> " . $escape($instagram) . "\n"
     . "<b>Artist:</b> " . $escape($artist) . "\n"
+    . "<b>Style:</b> " . $escape($style) . "\n"
     . "<b>Placement:</b> " . $escape($placement) . "\n\n"
-    . "<b>Tattoo idea:</b>\n" . $escape($idea);
+    . "<b>Tattoo idea:</b>\n" . $escape($idea) . "\n\n"
+    . "<b>SMS consent:</b> Yes\n"
+    . "<b>Promotional consent:</b> " . ($marketingConsent ? 'Yes' : 'No');
 
 if (!function_exists('curl_init')) {
     error_log('The PHP cURL extension is not enabled.');
@@ -167,7 +180,7 @@ function telegramRequest(string $botToken, string $method, array $payload, bool 
 }
 
 if ($photos !== []) {
-    $plainCaption = "OMA booking photos\nName: {$name}\nContact: {$contact}\nArtist: {$artist}\nPlacement: {$placement}";
+    $plainCaption = "OMA booking photos\nName: {$name}\nContact: {$contact}\nInstagram: {$instagram}\nArtist: {$artist}\nStyle: {$style}\nPlacement: {$placement}";
     if (count($photos) === 1) {
         $photo = $photos[0];
         $photoSent = telegramRequest($botToken, 'sendPhoto', [

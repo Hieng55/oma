@@ -209,15 +209,63 @@ const inquiryButton = inquiryForm?.querySelector('button[type="submit"]');
 let bookingPhotos;
 if (inquiryForm) {
   inquiryForm.enctype = 'multipart/form-data';
+  const contactInput = inquiryForm.querySelector('#contact-field');
+  const contactLabel = inquiryForm.querySelector('label[for="contact-field"]');
+  if (contactInput) {
+    contactInput.type = 'tel';
+    contactInput.autocomplete = 'tel';
+    contactInput.placeholder = '(402) 555-0123';
+    contactInput.inputMode = 'tel';
+  }
+  if (contactLabel) contactLabel.textContent = 'Phone number';
+
+  const submitSection = inquiryForm.querySelector('.booking-submit');
   const photoField = document.createElement('div');
   photoField.className = 'field booking-photo-field';
-  photoField.innerHTML = '<label for="booking-photos">Reference photos</label><small data-photo-note>Optional · Up to 5 JPG, PNG, or WebP images · 5 MB each</small><input id="booking-photos" name="photos[]" type="file" accept="image/jpeg,image/png,image/webp" multiple>';
-  inquiryForm.querySelector('.booking-submit')?.before(photoField);
+  photoField.innerHTML = '<label for="booking-photos">Reference photos</label><small data-photo-note>Optional - Up to 5 JPG, PNG, or WebP images - 5 MB each</small><label class="booking-photo-dropzone" for="booking-photos"><span aria-hidden="true">+</span><strong>Choose or drop images</strong><em>Show us your tattoo inspiration</em></label><input class="booking-photo-input" id="booking-photos" name="photos[]" type="file" accept="image/jpeg,image/png,image/webp" multiple><div class="booking-photo-list" data-photo-list aria-live="polite"></div>';
+  submitSection?.before(photoField);
+
+  const styleField = document.createElement('div');
+  styleField.className = 'field';
+  styleField.innerHTML = '<label for="style-choice">Select your style</label><small>Optional</small><select id="style-choice" name="style"><option value="">No preference</option><option>Black &amp; Grey Realism</option><option>Fine Line &amp; Microrealism</option><option>Realism Sculptures</option><option>Color &amp; Anime</option><option>Floral &amp; Ornamental</option><option>Custom Big Pieces</option></select>';
+  submitSection?.before(styleField);
+  const styleChoice = styleField.querySelector('select');
+  if (requestedStyle && styleChoice) {
+    const matchingStyle = [...styleChoice.options].find((option) => option.textContent.toLowerCase() === requestedStyle.toLowerCase());
+    if (matchingStyle) styleChoice.value = matchingStyle.value;
+  }
+
+  const instagramField = document.createElement('div');
+  instagramField.className = 'field';
+  instagramField.innerHTML = '<label for="instagram-handle">Instagram</label><small>Required</small><input id="instagram-handle" name="instagram" autocomplete="off" placeholder="@username" required maxlength="120">';
+  submitSection?.before(instagramField);
+
+  const consentField = document.createElement('fieldset');
+  consentField.className = 'booking-consents';
+  consentField.innerHTML = '<legend>Text message consent</legend><label><input type="checkbox" name="sms_consent" value="yes" required><span>I agree to receive informational text messages from OMA Tattoo about my tattoo inquiry.</span></label><label><input type="checkbox" name="marketing_consent" value="yes"><span>I agree to receive optional promotional text messages, such as artist availability and offers.</span></label><p>Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help.</p>';
+  submitSection?.before(consentField);
+
   bookingPhotos = photoField.querySelector('input');
   const photoNote = photoField.querySelector('[data-photo-note]');
+  const photoList = photoField.querySelector('[data-photo-list]');
+  const dropzone = photoField.querySelector('.booking-photo-dropzone');
   bookingPhotos?.addEventListener('change', () => {
     const count = bookingPhotos.files?.length || 0;
-    if (photoNote) photoNote.textContent = count ? `${count} image${count === 1 ? '' : 's'} selected · 5 maximum` : 'Optional · Up to 5 JPG, PNG, or WebP images · 5 MB each';
+    if (photoNote) photoNote.textContent = count ? `${count} image${count === 1 ? '' : 's'} selected - 5 maximum` : 'Optional - Up to 5 JPG, PNG, or WebP images - 5 MB each';
+    if (photoList) photoList.textContent = [...(bookingPhotos.files || [])].map((file) => file.name).join(', ');
+  });
+  ['dragenter', 'dragover'].forEach((eventName) => dropzone?.addEventListener(eventName, (event) => {
+    event.preventDefault();
+    dropzone.classList.add('is-dragging');
+  }));
+  ['dragleave', 'drop'].forEach((eventName) => dropzone?.addEventListener(eventName, (event) => {
+    event.preventDefault();
+    dropzone.classList.remove('is-dragging');
+  }));
+  dropzone?.addEventListener('drop', (event) => {
+    if (!bookingPhotos || !event.dataTransfer?.files.length) return;
+    bookingPhotos.files = event.dataTransfer.files;
+    bookingPhotos.dispatchEvent(new Event('change'));
   });
 }
 const loadSweetAlert = () => {
@@ -294,7 +342,9 @@ inquiryForm?.addEventListener('submit', async (event) => {
 
     form.reset();
     const photoNote = form.querySelector('[data-photo-note]');
-    if (photoNote) photoNote.textContent = 'Optional · Up to 5 JPG, PNG, or WebP images · 5 MB each';
+    const photoList = form.querySelector('[data-photo-list]');
+    if (photoNote) photoNote.textContent = 'Optional - Up to 5 JPG, PNG, or WebP images - 5 MB each';
+    if (photoList) photoList.textContent = '';
     if (inquiryNote) inquiryNote.textContent = 'Thank you! Your request was sent. OMA Tattoo will contact you soon.';
     const successMessage = result.message || 'Your booking request was sent successfully. OMA Tattoo will contact you soon.';
     if (Swal) {
