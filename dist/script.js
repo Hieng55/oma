@@ -206,6 +206,20 @@ if (requestedStyle && tattooIdea) tattooIdea.placeholder = `I'm interested in ${
 const inquiryForm = document.querySelector('#inquiry-form');
 const inquiryNote = document.querySelector('#form-note');
 const inquiryButton = inquiryForm?.querySelector('button[type="submit"]');
+let bookingPhotos;
+if (inquiryForm) {
+  inquiryForm.enctype = 'multipart/form-data';
+  const photoField = document.createElement('div');
+  photoField.className = 'field booking-photo-field';
+  photoField.innerHTML = '<label for="booking-photos">Reference photos</label><small data-photo-note>Optional · Up to 5 JPG, PNG, or WebP images · 5 MB each</small><input id="booking-photos" name="photos[]" type="file" accept="image/jpeg,image/png,image/webp" multiple>';
+  inquiryForm.querySelector('.booking-submit')?.before(photoField);
+  bookingPhotos = photoField.querySelector('input');
+  const photoNote = photoField.querySelector('[data-photo-note]');
+  bookingPhotos?.addEventListener('change', () => {
+    const count = bookingPhotos.files?.length || 0;
+    if (photoNote) photoNote.textContent = count ? `${count} image${count === 1 ? '' : 's'} selected · 5 maximum` : 'Optional · Up to 5 JPG, PNG, or WebP images · 5 MB each';
+  });
+}
 const loadSweetAlert = () => {
   if (window.Swal) return Promise.resolve(window.Swal);
   return new Promise((resolve, reject) => {
@@ -232,9 +246,30 @@ inquiryForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
   const form = event.currentTarget;
   const button = form.querySelector('button[type="submit"]');
+  const Swal = await sweetAlertReady;
+  const photos = [...(bookingPhotos?.files || [])];
+  let validationError = '';
+  if (photos.length > 5) validationError = 'Please choose no more than 5 reference images.';
+  if (!validationError && photos.some((photo) => photo.size > 5 * 1024 * 1024)) validationError = 'Each reference image must be 5 MB or smaller.';
+  if (!validationError && photos.some((photo) => photo.type && !['image/jpeg', 'image/png', 'image/webp'].includes(photo.type))) validationError = 'Only JPG, PNG, and WebP reference images are allowed.';
+  if (validationError) {
+    if (Swal) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'Check your images',
+        text: validationError,
+        confirmButtonText: 'Choose again',
+        confirmButtonColor: '#0a0a0a',
+        background: '#f1eee7',
+        color: '#0a0a0a'
+      });
+    } else {
+      window.alert(validationError);
+    }
+    return;
+  }
   if (button) button.disabled = true;
   if (inquiryNote) inquiryNote.textContent = 'Sending your request...';
-  const Swal = await sweetAlertReady;
   if (Swal) {
     Swal.fire({
       title: 'Sending request',
@@ -258,8 +293,10 @@ inquiryForm?.addEventListener('submit', async (event) => {
     if (!response.ok || !result.ok) throw new Error(result.message || 'Unable to send your request.');
 
     form.reset();
+    const photoNote = form.querySelector('[data-photo-note]');
+    if (photoNote) photoNote.textContent = 'Optional · Up to 5 JPG, PNG, or WebP images · 5 MB each';
     if (inquiryNote) inquiryNote.textContent = 'Thank you! Your request was sent. OMA Tattoo will contact you soon.';
-    const successMessage = 'Your booking request was sent successfully. OMA Tattoo will contact you soon.';
+    const successMessage = result.message || 'Your booking request was sent successfully. OMA Tattoo will contact you soon.';
     if (Swal) {
       await Swal.fire({
         icon: 'success',
