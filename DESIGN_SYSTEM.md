@@ -47,8 +47,8 @@ Only these colors may be used in the interface:
 
 ## 5. Components
 
-- Header: transparent over the hero, then opaque black after scroll; logo, navigation, and one booking CTA.
-- Hero: real OMA studio photograph, large two-line statement, one short supporting paragraph, one exploration control.
+- Header: fixed over the hero and black after scroll; OMA logo, full section navigation, live Omaha time, and one booking CTA.
+- Hero: full-screen slideshow using only supplied OMA photography, with a large OMA wordmark near the lower edge and a visible pause/play control.
 - Studio: verified introduction, daily hours, phone, and verified minimum price.
 - Portfolio: filter by artist; every image opens in an accessible modal.
 - Artists: list only supplied OMA artists and verified/supplied specialties.
@@ -58,8 +58,8 @@ Only these colors may be used in the interface:
 
 ## 6. Motion and interaction
 
-- Motion is restrained: image scale up to `1.04`, short underline reveals, header transition, and modal opening.
-- No autoplay audio, scroll hijacking, cursor replacement, excessive parallax, or looping decorative animation.
+- Motion is restrained: hero crossfades and scales up to `1.04`, short underline reveals, rail movement, header transition, and modal opening.
+- The hero slideshow may autoplay without audio and must include pause/play control. No autoplay audio, scroll hijacking, cursor replacement, or excessive parallax.
 - Respect `prefers-reduced-motion` and reduce transitions to effectively zero.
 - Keyboard focus, semantic controls, labels, alt text, and a skip link are required.
 

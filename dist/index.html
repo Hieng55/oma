@@ -2,147 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="OMA Tattoo is a professional tattoo studio in Omaha, Nebraska, specializing in fine line, black and grey, realism, and custom tattoo work.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="OMA Tattoo is a professional tattoo studio in Omaha, Nebraska.">
   <meta name="theme-color" content="#0a0a0a">
-  <title>OMA Tattoo — Where Art Meets Skin</title>
+  <title>OMA Tattoo | Professional Tattoo Studio in Omaha</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home-page">
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-progress" aria-hidden="true"><span></span></div>
   <header class="site-header" data-header>
-    <a class="brand" href="#top" aria-label="OMA Tattoo home">
-      <img src="assets/oma-logo.png" alt="OMA Tattoo">
-    </a>
+    <a class="header-logo" href="index.html" aria-label="OMA Tattoo home"><img src="assets/oma-logo.png" alt="OMA Tattoo"></a>
     <nav class="desktop-nav" aria-label="Main navigation">
-      <a href="#work">Work</a><a href="#artists">Artists</a><a href="#studio">Studio</a><a href="#reviews">Reviews</a>
+      <a href="artists.html">Artists</a><a href="styles.html">Styles</a><a href="studio.html">Studio</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a>
     </nav>
-    <a class="header-cta" href="#booking">Book a tattoo <span aria-hidden="true">↗</span></a>
-    <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav"><span>Menu</span><i></i><i></i></button>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
-      <a href="#work">Work</a><a href="#artists">Artists</a><a href="#studio">Studio</a><a href="#reviews">Reviews</a><a href="#booking">Book a tattoo</a>
+    <p class="local-time"><span data-omaha-time>--:-- --</span> · OMAHA</p>
+    <a class="book-button" href="booking.html">Book now</a>
+    <button class="menu-button" type="button" aria-controls="mobile-menu" aria-expanded="false"><span>Menu</span><i></i><i></i></button>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
+      <a href="artists.html">Artists</a><a href="styles.html">Styles</a><a href="studio.html">Studio</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a><a href="booking.html">Book now</a>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero-media"><img src="assets/studio-wide.jpg" alt="OMA Tattoo artists working with clients inside the Omaha studio"></div>
-      <div class="hero-shade"></div>
-      <div class="hero-copy">
-        <p class="eyebrow">Omaha, Nebraska · Tattoo studio</p>
-        <h1 id="hero-title"><span>Where art</span><span>meets skin.</span></h1>
-        <div class="hero-lower">
-          <p>Personal work. Precise craft. A clean, welcoming studio built around your story.</p>
-          <a class="circle-link" href="#work" aria-label="Explore OMA Tattoo work"><span>Explore</span><b aria-hidden="true">↓</b></a>
-        </div>
+    <section class="hero" aria-label="OMA Tattoo studio">
+      <div class="hero-slides" aria-live="off">
+        <figure class="hero-slide is-active" data-slide><img src="assets/studio-wide.jpg" alt="OMA Tattoo artists working with clients in the Omaha studio"></figure>
+        <figure class="hero-slide" data-slide><img src="assets/studio-desk.jpg" alt="OMA Tattoo reception desk"></figure>
+        <figure class="hero-slide" data-slide><img src="assets/studio-detail.jpg" alt="Decor details inside OMA Tattoo"></figure>
+        <figure class="hero-slide" data-slide><img src="assets/studio-floor.jpg" alt="Tattoo stations inside OMA Tattoo"></figure>
       </div>
-      <div class="hero-side" aria-hidden="true">OMA — 10808 Prairie Hills Drive</div>
-    </section>
-
-    <section class="intro section-pad" id="studio">
-      <p class="section-index">01 / The studio</p>
-      <div class="intro-grid">
-        <h2>Ideas become<br>lasting art.</h2>
-        <div class="intro-copy">
-          <p class="lead">Every tattoo tells a story. OMA Tattoo brings yours to life with precision, creativity, and care.</p>
-          <p>Our artists work across fine line, black &amp; grey, realism, floral, ornamental, anime, and custom designs. Hygiene and safety remain central to every appointment.</p>
-          <div class="facts" aria-label="Studio information">
-            <div><span>Open daily</span><strong>11 AM — 7 PM</strong></div>
-            <div><span>Minimum</span><strong>From $100</strong></div>
-            <div><span>Call</span><strong>(402) 680-1201</strong></div>
-          </div>
-        </div>
-      </div>
-      <div class="studio-strip" aria-label="OMA Tattoo studio photographs">
-        <figure class="studio-card studio-card--wide"><img src="assets/studio-floor.jpg" alt="Clean tattoo stations inside OMA Tattoo"><figcaption>Professional studio</figcaption></figure>
-        <figure class="studio-card"><img src="assets/studio-desk.jpg" alt="OMA Tattoo reception desk"><figcaption>Omaha, NE</figcaption></figure>
-        <figure class="studio-card"><img src="assets/studio-detail.jpg" alt="Decor details at OMA Tattoo"><figcaption>Built with care</figcaption></figure>
+      <div class="hero-vignette" aria-hidden="true"></div>
+      <div class="hero-brand" data-hero-brand><h1>OMA TATTOO</h1><p>Where art meets skin</p></div>
+      <div class="slide-dots" role="group" aria-label="Hero slides">
+        <button class="is-active" type="button" data-slide-dot="0" aria-label="Show studio slide"></button>
+        <button type="button" data-slide-dot="1" aria-label="Show reception slide"></button>
+        <button type="button" data-slide-dot="2" aria-label="Show studio detail slide"></button>
+        <button type="button" data-slide-dot="3" aria-label="Show tattoo stations slide"></button>
       </div>
     </section>
 
-    <section class="work section-pad" id="work" aria-labelledby="work-title">
-      <div class="section-head">
-        <p class="section-index">02 / Selected work</p>
-        <h2 id="work-title">Made to be<br><em>yours.</em></h2>
-        <p>Explore a selection of recent work from the OMA team. Filter by artist, then open any piece for a closer look.</p>
+    <section class="styles-section" id="styles">
+      <div class="section-heading section-heading--center">
+        <h2>Masters in different styles</h2>
+        <p>Explore the work, find the direction that feels right, and bring your idea to the OMA team.</p>
+        <a class="outline-button" href="styles.html">View all styles</a>
       </div>
-      <div class="filter-row" role="group" aria-label="Filter work by artist">
-        <button class="filter is-active" data-filter="all" type="button">All work</button>
-        <button class="filter" data-filter="amaury" type="button">Amaury</button>
-        <button class="filter" data-filter="bee" type="button">Bee</button>
-        <button class="filter" data-filter="kimiko" type="button">Kimiko</button>
-        <button class="filter" data-filter="tea" type="button">Tea</button>
-        <button class="filter" data-filter="thea" type="button">Thea</button>
-      </div>
-      <div class="work-grid" data-gallery>
-        <button class="work-item work-item--tall" data-artist="tea" data-label="Black & grey realism by Tea" type="button"><img src="assets/artists/Tea/photo_2026-11-18_22-14-20.jpg" alt="Black and grey lion sleeve tattoo"><span>Tea · Realism</span></button>
-        <button class="work-item" data-artist="kimiko" data-label="Fine line floral work by Kimiko" type="button"><img src="assets/artists/Kimiko/photo_2026-11-18_22-12-10.jpg" alt="Fine line floral tattoo"><span>Kimiko · Fine line</span></button>
-        <button class="work-item" data-artist="bee" data-label="Color realism work by Bee" type="button"><img src="assets/artists/Bee/photo_2026-11-18_22-13-36.jpg" alt="Detailed color tattoo by Bee"><span>Bee · Color</span></button>
-        <button class="work-item work-item--wide" data-artist="amaury" data-label="Realism work by Amaury" type="button"><img src="assets/artists/amaury/photo_2026-11-18_22-08-48.jpg" alt="Realism tattoo by Amaury"><span>Amaury · Realism</span></button>
-        <button class="work-item" data-artist="thea" data-label="Ornamental work by Thea" type="button"><img src="assets/artists/Thea/photo_2026-11-18_22-10-26.jpg" alt="Ornamental tattoo by Thea"><span>Thea · Ornamental</span></button>
-        <button class="work-item work-item--tall" data-artist="tea" data-label="Black & grey realism by Tea" type="button"><img src="assets/artists/Tea/photo_2026-11-18_22-14-22.jpg" alt="Black and grey angel leg tattoo"><span>Tea · Black &amp; grey</span></button>
-        <button class="work-item" data-artist="kimiko" data-label="X-ray floral work by Kimiko" type="button"><img src="assets/artists/Kimiko/photo_2026-11-18_22-12-16.jpg" alt="X-ray floral tattoo by Kimiko"><span>Kimiko · X-ray floral</span></button>
-        <button class="work-item" data-artist="bee" data-label="Anime work by Bee" type="button"><img src="assets/artists/Bee/photo_2026-11-18_22-13-43.jpg" alt="Anime tattoo by Bee"><span>Bee · Anime</span></button>
+      <div class="rail-controls" aria-label="Style carousel controls"><button type="button" data-rail-prev aria-label="Previous styles">‹</button><button type="button" data-rail-next aria-label="Next styles">›</button></div>
+      <div class="styles-rail" data-styles-rail tabindex="0" aria-label="Tattoo styles">
+        <article class="style-card"><a class="style-image" href="black-grey.html"><img src="assets/artists/Tea/photo_2026-11-18_22-14-20.jpg" alt="Black and grey lion sleeve tattoo" loading="lazy"></a><h2><a href="black-grey.html">Black &amp; Grey Realism</a></h2><p>Deep shading and dimensional realism for timeless, expressive pieces.</p></article>
+        <article class="style-card"><a class="style-image" href="fine-line.html"><img src="assets/artists/Thea/photo_2026-11-18_22-10-26.jpg" alt="Fine line tattoo by Thea" loading="lazy"></a><h2><a href="fine-line.html">Fine Line &amp; Microrealism</a></h2><p>Precise, delicate work with impressive depth and subtle detail.</p></article>
+        <article class="style-card"><a class="style-image" href="realism.html"><img src="assets/artists/amaury/photo_2026-11-18_22-08-48.jpg" alt="Realism tattoo by Amaury" loading="lazy"></a><h2><a href="realism.html">Realism Sculptures</a></h2><p>Hyperrealistic work inspired by sculpture and classical art.</p></article>
+        <article class="style-card"><a class="style-image" href="color-anime.html"><img src="assets/artists/Bee/photo_2026-11-18_22-13-43.jpg" alt="Color anime tattoo by Bee" loading="lazy"></a><h2><a href="color-anime.html">Color &amp; Anime</a></h2><p>Bold character work with vivid color, clean forms, and graphic detail.</p></article>
+        <article class="style-card"><a class="style-image" href="floral-ornamental.html"><img src="assets/artists/Kimiko/photo_2026-11-18_22-12-10.jpg" alt="Floral tattoo by Kimiko" loading="lazy"></a><h2><a href="floral-ornamental.html">Floral &amp; Ornamental</a></h2><p>Botanical forms shaped through fine line and ornamental approaches.</p></article>
+        <article class="style-card"><a class="style-image" href="custom-big-pieces.html"><img src="assets/artists/Tea/photo_2026-11-18_22-14-22.jpg" alt="Custom angel tattoo by Tea" loading="lazy"></a><h2><a href="custom-big-pieces.html">Custom Big Pieces</a></h2><p>Large-scale original work developed around your story and placement.</p></article>
       </div>
     </section>
 
-    <section class="artists section-pad" id="artists" aria-labelledby="artists-title">
-      <div class="section-head section-head--light">
-        <p class="section-index">03 / Meet the artists</p>
-        <h2 id="artists-title">One studio.<br>Distinct voices.</h2>
-      </div>
-      <div class="artist-list">
-        <article class="artist-card"><img src="assets/artists/amaury/photo_2026-11-18_22-08-45.jpg" alt="Amaury tattooing"><div><span>01</span><h3>Amaury</h3><p>Realism · Cover up</p></div></article>
-        <article class="artist-card"><img src="assets/artists/Bee/photo_2026-11-18_22-13-34.jpg" alt="Bee tattooing"><div><span>02</span><h3>Bee</h3><p>Realism · Mini color · Anime</p></div></article>
-        <article class="artist-card"><img src="assets/artists/Kimiko/photo_2026-11-18_22-12-08.jpg" alt="Kimiko in the OMA studio"><div><span>03</span><h3>Kimiko</h3><p>X-ray · Fine line · Floral</p></div></article>
-        <article class="artist-card"><img src="assets/artists/Tea/photo_2026-11-18_22-14-18.jpg" alt="Tea tattooing"><div><span>04</span><h3>Tea</h3><p>Black &amp; grey · Realism</p></div></article>
-        <article class="artist-card"><img src="assets/artists/Thea/photo_2026-11-18_22-10-24.jpg" alt="Thea tattooing"><div><span>05</span><h3>Thea</h3><p>Fine line · Floral · Ornamental</p></div></article>
-      </div>
-    </section>
-
-    <section class="reviews section-pad" id="reviews" aria-labelledby="reviews-title">
-      <p class="section-index">04 / Client notes</p>
-      <div class="review-layout">
-        <div><h2 id="reviews-title">Good work starts<br>with trust.</h2><p>Feedback shared by OMA clients about the artists, studio, and experience.</p></div>
-        <div class="review-stack">
-          <article><p>Detailed work, a relaxed atmosphere, and thoughtful aftercare made the visit stand out.</p><span>Andrés DB</span></article>
-          <article><p>Focused artistry and a full piece completed in one session.</p><span>Alec Tonemah</span></article>
-          <article><p>A clean studio, professional service, and a comfortable experience from start to finish.</p><span>Alex Daley</span></article>
-          <article><p>Beautiful results and an artist worth coming back to.</p><span>Miranda Musil</span></article>
-        </div>
+    <section class="artists-section" id="artists">
+      <div class="artist-backdrop" aria-hidden="true"></div>
+      <div class="section-heading section-heading--center section-heading--artists"><h2>Meet our artists</h2><p>Five artists, distinct specialties, one professional studio in Omaha.</p><div class="artist-actions"><a class="outline-button" href="artists.html">View all artists</a></div></div>
+      <div class="artist-grid">
+        <article class="artist-card"><a class="artist-photo" href="amaury.html"><img src="assets/artists/amaury/photo_2026-11-18_22-08-45.jpg" alt="Amaury tattooing at OMA" loading="lazy"><span>View portfolio</span></a><p>Realism · Cover up</p><h3><a href="amaury.html">Amaury</a></h3></article>
+        <article class="artist-card"><a class="artist-photo" href="bee.html"><img src="assets/artists/Bee/photo_2026-11-18_22-13-34.jpg" alt="Bee tattooing at OMA" loading="lazy"><span>View portfolio</span></a><p>Realism · Mini color · Anime</p><h3><a href="bee.html">Bee</a></h3></article>
+        <article class="artist-card"><a class="artist-photo" href="kimiko.html"><img src="assets/artists/Kimiko/photo_2026-11-18_22-12-08.jpg" alt="Kimiko at OMA Tattoo" loading="lazy"><span>View portfolio</span></a><p>X-ray · Fine line · Floral</p><h3><a href="kimiko.html">Kimiko</a></h3></article>
+        <article class="artist-card"><a class="artist-photo" href="tea.html"><img src="assets/artists/Tea/photo_2026-11-18_22-14-18.jpg" alt="Tea tattooing at OMA" loading="lazy"><span>View portfolio</span></a><p>Black &amp; grey · Realism</p><h3><a href="tea.html">Tea</a></h3></article>
+        <article class="artist-card artist-card--feature"><a class="artist-photo" href="thea.html"><img src="assets/artists/Thea/photo_2026-11-18_22-10-24.jpg" alt="Thea tattooing at OMA" loading="lazy"><span>View portfolio</span></a><p>Fine line · Floral · Ornamental</p><h3><a href="thea.html">Thea</a></h3></article>
+        <a class="artist-card artist-card--cta" href="booking.html"><div><span>Have an artist in mind?</span><strong>Start your project</strong></div></a>
       </div>
     </section>
 
-    <section class="booking" id="booking" aria-labelledby="booking-title">
-      <div class="booking-image"><img src="assets/studio-wide.jpg" alt="Inside OMA Tattoo studio"></div>
-      <div class="booking-panel">
-        <p class="section-index">05 / Start your piece</p>
-        <h2 id="booking-title">Tell us what<br>you’re imagining.</h2>
-        <p>Share the idea, placement, style, and artist you have in mind. Your text message will open ready to send to OMA Tattoo.</p>
-        <form id="inquiry-form">
-          <label>Full name<input name="name" autocomplete="name" required></label>
-          <label>Phone or email<input name="contact" autocomplete="email" required></label>
-          <label>Your tattoo idea<textarea name="idea" rows="4" required></textarea></label>
-          <div class="form-pair"><label>Placement<input name="placement"></label><label>Preferred artist<select name="artist"><option>No preference</option><option>Amaury</option><option>Bee</option><option>Kimiko</option><option>Tea</option><option>Thea</option></select></label></div>
-          <button class="submit-button" type="submit">Open text message <span aria-hidden="true">↗</span></button>
-          <p class="form-note" id="form-note" aria-live="polite">For immediate help, call <a href="tel:+14026801201">(402) 680-1201</a>.</p>
-        </form>
-      </div>
+    <section class="studio-section" id="studio">
+      <div class="studio-image"><img src="assets/studio-floor.jpg" alt="Clean tattoo stations inside OMA Tattoo" loading="lazy"></div>
+      <div class="studio-copy"><p class="micro-label">OMA Tattoo · Omaha, Nebraska</p><h2>Art, individuality, and self-expression meet here.</h2><p>OMA Tattoo is a clean, comfortable, and welcoming studio dedicated to high-quality tattoo artistry. Every consultation starts by listening to your idea and understanding the story behind it.</p><dl><div><dt>Open</dt><dd>Monday to Sunday<br>11:00 AM to 7:00 PM</dd></div><div><dt>Minimum</dt><dd>Tattoos start at $100</dd></div><div><dt>Call</dt><dd><a href="tel:+14026801201">(402) 680-1201</a></dd></div><div><dt>Social</dt><dd><nav class="studio-social-links" aria-label="OMA Tattoo social profiles"><a href="https://www.instagram.com/omatattoo.shop/" target="_blank" rel="noopener noreferrer" aria-label="OMA Tattoo on Instagram"><img src="assets/instagram.svg" alt="" aria-hidden="true"></a><a href="https://www.facebook.com/omatattoo68144" target="_blank" rel="noopener noreferrer" aria-label="OMA Tattoo on Facebook"><img src="assets/facebook.svg" alt="" aria-hidden="true"></a></nav></dd></div></dl></div>
     </section>
+
+    <section class="reviews-section" id="reviews"><div class="reviews-head"><p class="micro-label">Customer feedback</p><h2>Chosen by Omaha clients</h2></div><div class="review-rail"><article><p>Detailed work, a relaxed atmosphere, and thoughtful aftercare made the visit stand out.</p><span>Andrés DB</span></article><article><p>Focused artistry and a full piece completed in one session.</p><span>Alec Tonemah</span></article><article><p>A clean studio, professional service, and a comfortable experience from start to finish.</p><span>Alex Daley</span></article><article><p>Beautiful results and an artist worth coming back to.</p><span>Miranda Musil</span></article></div></section>
+
+    <section class="booking-section" id="booking"><div class="booking-head"><h2>Book now</h2><p>Thank us later</p></div><form id="inquiry-form" class="booking-form"><div class="field"><label for="name">Name &amp; surname</label><small>Required</small><input id="name" name="name" autocomplete="name" placeholder="Your name" required></div><div class="field"><label for="contact-field">Phone or email</label><small>Required</small><input id="contact-field" name="contact" autocomplete="email" placeholder="How should we reach you?" required></div><div class="field"><label for="idea">Tattoo idea</label><small>Required</small><textarea id="idea" name="idea" rows="4" placeholder="Tell us what you have in mind" required></textarea></div><div class="form-row"><div class="field"><label for="placement">Placement</label><small>Optional</small><input id="placement" name="placement" placeholder="Where on the body?"></div><div class="field"><label for="artist-choice">Artist</label><small>Optional</small><select id="artist-choice" name="artist"><option>No preference</option><option>Amaury</option><option>Bee</option><option>Kimiko</option><option>Tea</option><option>Thea</option></select></div></div><div class="booking-submit"><p id="form-note" aria-live="polite">This opens a text message to OMA Tattoo. It does not send automatically.</p><button type="submit">Book now</button></div></form></section>
   </main>
 
   <footer>
-    <div class="footer-mark"><img src="assets/oma-logo.png" alt="OMA Tattoo"><p>Where art meets skin.</p></div>
-    <div><span>Visit</span><a href="https://maps.google.com/?q=10808+Prairie+Hills+Dr+Omaha+NE+68144" target="_blank" rel="noreferrer">10808 Prairie Hills Dr<br>Omaha, NE 68144</a></div>
-    <div><span>Hours</span><p>Monday — Sunday<br>11:00 AM — 7:00 PM</p></div>
-    <div><span>Contact</span><a href="tel:+14026801201">+1 (402) 680-1201</a><a href="https://www.instagram.com/omatattoo.shop/" target="_blank" rel="noreferrer">@omatattoo.shop</a></div>
-    <p class="copyright">© 2026 OMA Tattoo. All rights reserved.</p>
+    <div><h2>Contact</h2><p>Have questions about your project?<br>We guide you before your appointment.</p><a href="tel:+14026801201">+1 (402) 680-1201</a></div>
+    <div><h2>OMA Tattoo Omaha</h2><a href="https://www.google.com/maps?cid=12009149571975565015" target="_blank" rel="noopener noreferrer">10808 Prairie Hills Dr<br>Omaha, NE 68144</a></div>
+    <div><h2>Opening hours</h2><p>Monday to Sunday<br>11:00 AM to 7:00 PM</p></div>
+    <div><h2>Explore</h2><a href="artists.html">Artists</a><a href="styles.html">Styles</a><a href="booking.html">Book now</a></div>
+    <div class="footer-bottom"><strong class="footer-brand">OMA TATTOO</strong><p>© 2026 OMA Tattoo. All rights reserved.</p></div>
   </footer>
-
-  <dialog class="lightbox" aria-label="Selected tattoo work"><button class="lightbox-close" type="button" aria-label="Close image">×</button><img src="" alt=""><p></p></dialog>
+  <dialog class="lightbox" aria-label="Selected OMA Tattoo work"><button class="lightbox-close" type="button" aria-label="Close image">×</button><img src="" alt=""><p></p></dialog>
   <script src="script.js"></script>
 </body>
 </html>
