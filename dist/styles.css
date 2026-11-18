@@ -203,9 +203,6 @@ footer .footer-socials .footer-social-map{width:16px;height:22px;filter:none}
 .careers-hero-copy>p:not(.micro-label){max-width:58ch;margin:0 0 34px;color:var(--stone);font-size:1rem}
 .careers-hero-image{min-height:620px;overflow:hidden}
 .careers-hero-image img{height:100%;object-fit:cover;filter:saturate(.75) contrast(1.05)}
-.careers-intro{display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(40px,8vw,130px);padding:clamp(90px,11vw,160px) var(--gutter);background:var(--paper);color:var(--ink)}
-.careers-intro h2{max-width:900px;margin:0 0 24px;font:800 clamp(3.2rem,6.5vw,7.5rem)/.84 var(--display);letter-spacing:-.08em;text-transform:uppercase;text-wrap:balance}
-.careers-intro div>p{max-width:62ch;margin:0;font-size:clamp(1rem,1.3vw,1.25rem)}
 .careers-application{display:grid;grid-template-columns:minmax(260px,.65fr) minmax(0,1.35fr);gap:clamp(50px,8vw,130px);padding:clamp(90px,10vw,150px) var(--gutter);background:#111}
 .careers-application aside{position:sticky;top:125px;align-self:start}
 .careers-application aside h2{margin:0 0 24px;font:800 clamp(3rem,5vw,6rem)/.84 var(--display);letter-spacing:-.075em;text-transform:uppercase}
@@ -224,5 +221,5 @@ footer .footer-socials .footer-social-map{width:16px;height:22px;filter:none}
 .careers-submit button{width:100%;min-height:62px;border:0;border-radius:5px;background:var(--ink);color:var(--paper);font:800 clamp(1.5rem,2.5vw,2.5rem)/1 var(--display);letter-spacing:-.05em;text-transform:uppercase;cursor:pointer;transition:background-color .14s ease-out,color .14s ease-out,opacity .14s ease-out}
 .careers-submit button:hover{background:var(--warm);color:var(--ink)}
 .careers-submit button:disabled{cursor:wait;opacity:.58}
-@media(max-width:960px){.careers-hero{grid-template-columns:1fr;min-height:0}.careers-hero-copy{padding-top:130px}.careers-hero-image{height:62vw;min-height:390px}.careers-intro,.careers-application{grid-template-columns:1fr}.careers-application aside{position:static}.careers-application aside>p:not(.micro-label){max-width:62ch}}
-@media(max-width:620px){.careers-hero-copy{padding:115px 24px 70px}.careers-hero-copy h1{font-size:clamp(3.6rem,17vw,6rem)}.careers-intro,.careers-application{padding-inline:24px}.careers-form{padding:26px 20px}.careers-form-row{grid-template-columns:1fr;gap:0}}
+@media(max-width:960px){.careers-hero{grid-template-columns:1fr;min-height:0}.careers-hero-copy{padding-top:130px}.careers-hero-image{height:62vw;min-height:390px}.careers-application{grid-template-columns:1fr}.careers-application aside{position:static}.careers-application aside>p:not(.micro-label){max-width:62ch}}
+@media(max-width:620px){.careers-hero-copy{padding:115px 24px 70px}.careers-hero-copy h1{font-size:clamp(3.6rem,17vw,6rem)}.careers-application{padding-inline:24px}.careers-form{padding:26px 20px}.careers-form-row{grid-template-columns:1fr;gap:0}}
