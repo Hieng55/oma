@@ -206,6 +206,25 @@ if (requestedStyle && tattooIdea) tattooIdea.placeholder = `I'm interested in ${
 const inquiryForm = document.querySelector('#inquiry-form');
 const inquiryNote = document.querySelector('#form-note');
 const inquiryButton = inquiryForm?.querySelector('button[type="submit"]');
+const loadSweetAlert = () => {
+  if (window.Swal) return Promise.resolve(window.Swal);
+  return new Promise((resolve, reject) => {
+    const existingScript = document.querySelector('script[data-sweetalert]');
+    if (existingScript) {
+      existingScript.addEventListener('load', () => resolve(window.Swal), { once: true });
+      existingScript.addEventListener('error', reject, { once: true });
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.all.min.js';
+    script.async = true;
+    script.dataset.sweetalert = '';
+    script.addEventListener('load', () => resolve(window.Swal), { once: true });
+    script.addEventListener('error', reject, { once: true });
+    document.head.append(script);
+  });
+};
+const sweetAlertReady = inquiryForm ? loadSweetAlert().catch(() => null) : Promise.resolve(null);
 if (inquiryNote) inquiryNote.textContent = 'Your request will be sent securely to OMA Tattoo.';
 if (inquiryButton) inquiryButton.textContent = 'Send booking request';
 
@@ -215,6 +234,19 @@ inquiryForm?.addEventListener('submit', async (event) => {
   const button = form.querySelector('button[type="submit"]');
   if (button) button.disabled = true;
   if (inquiryNote) inquiryNote.textContent = 'Sending your request...';
+  const Swal = await sweetAlertReady;
+  if (Swal) {
+    Swal.fire({
+      title: 'Sending request',
+      text: 'Please wait while we contact OMA Tattoo.',
+      background: '#f1eee7',
+      color: '#0a0a0a',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      showConfirmButton: false,
+      didOpen: () => Swal.showLoading()
+    });
+  }
 
   try {
     const response = await fetch('api/send-telegram.php', {
@@ -227,8 +259,36 @@ inquiryForm?.addEventListener('submit', async (event) => {
 
     form.reset();
     if (inquiryNote) inquiryNote.textContent = 'Thank you! Your request was sent. OMA Tattoo will contact you soon.';
+    const successMessage = 'Your booking request was sent successfully. OMA Tattoo will contact you soon.';
+    if (Swal) {
+      await Swal.fire({
+        icon: 'success',
+        title: 'Request sent',
+        text: successMessage,
+        confirmButtonText: 'Done',
+        confirmButtonColor: '#0a0a0a',
+        background: '#f1eee7',
+        color: '#0a0a0a'
+      });
+    } else {
+      window.alert(successMessage);
+    }
   } catch (error) {
-    if (inquiryNote) inquiryNote.textContent = `${error.message} Please call or text +1 (402) 680-1201.`;
+    const errorMessage = `${error.message} Please call or text +1 (402) 680-1201.`;
+    if (inquiryNote) inquiryNote.textContent = errorMessage;
+    if (Swal) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'Unable to send request',
+        text: errorMessage,
+        confirmButtonText: 'Try again',
+        confirmButtonColor: '#0a0a0a',
+        background: '#f1eee7',
+        color: '#0a0a0a'
+      });
+    } else {
+      window.alert(errorMessage);
+    }
   } finally {
     if (button) button.disabled = false;
   }
