@@ -1,7 +1,5 @@
 ---
 deployment:
   tasks:
-    - npm run build
-    - export DEPLOYPATH="$HOME/public_html"
-    - /bin/mkdir -p "$DEPLOYPATH"
-    - /bin/cp -R out/. "$DEPLOYPATH/"
+    - export DEPLOYPATH=/home/omatatto/public_html/
+    - /bin/cp -R dist/. $DEPLOYPATH

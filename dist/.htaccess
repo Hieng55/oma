@@ -1,0 +1,26 @@
+DirectoryIndex index.html index.php
+
+# This deployment serves the static OMA site instead of the previous
+# WordPress front controller that remains in public_html.
+<IfModule mod_rewrite.c>
+  RewriteEngine Off
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 30 days"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(?:html|php)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
