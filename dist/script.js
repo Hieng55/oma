@@ -191,11 +191,33 @@ const requestedStyle = new URLSearchParams(window.location.search).get('style');
 const tattooIdea = document.querySelector('#idea');
 if (requestedStyle && tattooIdea) tattooIdea.placeholder = `I'm interested in ${requestedStyle}. Tell us more about your idea.`;
 
-document.querySelector('#inquiry-form')?.addEventListener('submit', (event) => {
+const inquiryForm = document.querySelector('#inquiry-form');
+const inquiryNote = document.querySelector('#form-note');
+const inquiryButton = inquiryForm?.querySelector('button[type="submit"]');
+if (inquiryNote) inquiryNote.textContent = 'Your request will be sent securely to OMA Tattoo.';
+if (inquiryButton) inquiryButton.textContent = 'Send booking request';
+
+inquiryForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const data = new FormData(event.currentTarget);
-  const message = `Hi OMA Tattoo - my name is ${data.get('name')}. Contact: ${data.get('contact')}. Tattoo idea: ${data.get('idea')}. Placement: ${data.get('placement') || 'Not decided'}. Artist: ${data.get('artist')}.`;
-  const note = document.querySelector('#form-note');
-  if (note) note.textContent = 'Opening your messaging app...';
-  window.location.href = `sms:+14026801201?&body=${encodeURIComponent(message)}`;
+  const form = event.currentTarget;
+  const button = form.querySelector('button[type="submit"]');
+  if (button) button.disabled = true;
+  if (inquiryNote) inquiryNote.textContent = 'Sending your request...';
+
+  try {
+    const response = await fetch('api/send-telegram.php', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: new FormData(form)
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.ok) throw new Error(result.message || 'Unable to send your request.');
+
+    form.reset();
+    if (inquiryNote) inquiryNote.textContent = 'Thank you! Your request was sent. OMA Tattoo will contact you soon.';
+  } catch (error) {
+    if (inquiryNote) inquiryNote.textContent = `${error.message} Please call or text +1 (402) 680-1201.`;
+  } finally {
+    if (button) button.disabled = false;
+  }
 });
